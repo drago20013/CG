@@ -1,0 +1,13 @@
+Library
+Logs
+Packages
+ProjectSettings
+Temp
+UserSettings
+*.csproj
+.plastic
+.vs
+.vsconfig
+CG.sln
+UpgradeLog.htm
+ignore.conf
