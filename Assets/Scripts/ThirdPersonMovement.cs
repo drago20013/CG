@@ -14,6 +14,12 @@ public class ThirdPersonMovement : MonoBehaviour
     private float lookRotation;
     public bool grounded;
 
+    //runs once 
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();
@@ -29,15 +35,12 @@ public class ThirdPersonMovement : MonoBehaviour
         Jump();    
     }
 
+    //for physics 
     void FixedUpdate()
     {
         Move();
     }
 
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
 
     void LateUpdate()
     {
