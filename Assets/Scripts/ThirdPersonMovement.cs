@@ -15,7 +15,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private float lookRotation;
     public bool grounded;
 
-    public CollectableItems potion;
+    public CollectableItems antiGravity;
 
 
     //runs once 
@@ -43,12 +43,12 @@ public class ThirdPersonMovement : MonoBehaviour
     //function that checks if "E" key is pressed, and then sets rb.gravity to false for 10 seconds
     public void OnE(InputAction.CallbackContext context)
     {
-        if (potion.antiGravityPower)
+        if (antiGravity.antiGravityPower)
         {
-            if (context.phase == InputActionPhase.Performed)
-            {
+            //if (context.action.triggered && context.phase == InputActionPhase.Performed)
+           // {
                 onPowerActivate();
-            }
+           // }
         }
     }
 
@@ -56,7 +56,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public void onPowerActivate()
     {
         antiGravityStartTime = Time.time;
-        potion.antiGravityPower = false;
+        antiGravity.antiGravityPower = false;
         rb.useGravity = false;
     }
 

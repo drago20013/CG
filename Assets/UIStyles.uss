@@ -1,0 +1,4 @@
+.label-style {
+    font-size: 40px;
+    -unity-font: initial;
+}

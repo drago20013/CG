@@ -10,31 +10,12 @@ public class CollectableItems : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // if (other.CompareTag("Player"))
-        // {
-        // Add code here to give the player some reward for collecting the item
-
         // Destroy the collectible item
         if (other.gameObject.layer == 6)
         {
             Destroy(other.gameObject);
             antiGravityPower = true;
         }
-        // }
-    }
-
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 }
