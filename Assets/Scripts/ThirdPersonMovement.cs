@@ -5,20 +5,25 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class ThirdPersonMovement : MonoBehaviour
 {
     public Rigidbody rb;
     public GameObject camHolder;
-    public float speed, sensitivity, maxForce, jumpForce;
+    public float speed, sensitivity, maxForce, jumpForce, gravity, antiGravityStartTime;
     private Vector2 move, look;
     private float lookRotation;
     public bool grounded;
+
+    public CollectableItems potion;
+
 
     //runs once 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
+
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -32,13 +37,47 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Jump();    
+        Jump();
     }
+
+    //function that checks if "E" key is pressed, and then sets rb.gravity to false for 10 seconds
+    public void OnE(InputAction.CallbackContext context)
+    {
+        if (potion.antiGravityPower)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                onPowerActivate();
+            }
+        }
+    }
+
+
+    public void onPowerActivate()
+    {
+        antiGravityStartTime = Time.time;
+        potion.antiGravityPower = false;
+        rb.useGravity = false;
+    }
+
+    void Update()
+    {
+        if (antiGravityStartTime != 0.0f)
+        {
+            if (Time.time - antiGravityStartTime > 10)
+            {
+                antiGravityStartTime = 0;
+                rb.useGravity = true;
+            }
+        }
+    }
+
 
     //for physics 
     void FixedUpdate()
     {
         Move();
+
     }
 
 
