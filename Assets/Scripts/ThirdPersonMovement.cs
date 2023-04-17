@@ -16,7 +16,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public bool grounded;
 
     public CollectableItems antiGravity;
-
+    public UIController uiController;
 
     //runs once 
     void Start()
@@ -45,13 +45,9 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (antiGravity.antiGravityPower)
         {
-            //if (context.action.triggered && context.phase == InputActionPhase.Performed)
-           // {
-                onPowerActivate();
-           // }
+            onPowerActivate();
         }
     }
-
 
     public void onPowerActivate()
     {
@@ -64,8 +60,10 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (antiGravityStartTime != 0.0f)
         {
-            if (Time.time - antiGravityStartTime > 10)
-            {
+            float elapsedTime = Time.time - antiGravityStartTime;
+            uiController.DisplayBufTime(10 - elapsedTime);
+            if (elapsedTime > 10)
+            { 
                 antiGravityStartTime = 0;
                 rb.useGravity = true;
             }

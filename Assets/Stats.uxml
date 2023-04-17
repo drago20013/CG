@@ -6,5 +6,10 @@
             <ui:Label text="Time:" display-tooltip-when-elided="true" class="label-style" />
             <ui:Label text="##:##" display-tooltip-when-elided="true" name="time" enable-rich-text="true" class="label-style" />
         </ui:VisualElement>
+        <ui:VisualElement name="buf" style="flex-direction: row; height: auto; width: auto; margin-right: 20px; margin-left: 20px; justify-content: center; align-items: center;">
+            <ui:Label display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1087164816274819069&amp;guid=255f98cb7de283d4d983f9300c7090ce&amp;type=3#arrow-right@2x&apos;); -unity-background-scale-mode: stretch-to-fill; width: 48px; height: 36px;" />
+            <ui:Label text="Time:" display-tooltip-when-elided="true" class="label-style" />
+            <ui:Label text="##:##" display-tooltip-when-elided="true" name="buf-time" enable-rich-text="true" class="label-style" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
