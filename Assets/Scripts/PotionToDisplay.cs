@@ -17,7 +17,7 @@ public class PotionToDisplay : MonoBehaviour
     void Start()
     {
         // when no potion make it false always
-        currentPotionImage.enabled = true;
+        currentPotionImage.enabled = false;
     }
 
     // please forgive me god, it is the ugliest flag but I want to sleep today
