@@ -42,11 +42,11 @@ public class CollectableItems : MonoBehaviour
         if (availablePotions.Count != 0) 
         {
             this.chosenPotion = this.availablePotions[0];
+            potionToDisplay.changeImage(this.chosenPotion);
 
         } else {
-            this.chosenPotion = "null";
+            potionToDisplay.changeImage(null);
         }
-        potionToDisplay.changeImage(this.chosenPotion);
     }
 
 

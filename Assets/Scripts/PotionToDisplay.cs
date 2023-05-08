@@ -26,18 +26,21 @@ public class PotionToDisplay : MonoBehaviour
         if (potionName == "antiGravity")
         {
             currentPotionImage.sprite = antiGravityImage;
+            currentPotionImage.enabled = true;
         }
 
         else if (potionName == "increaseWeight")
         {
             currentPotionImage.sprite = increaseWeightImage;
+            currentPotionImage.enabled = true;
         }
-        else if (potionName == "null") 
+        else if (potionName == null) 
         {
             currentPotionImage.enabled = false;
         }
 
     }
+
 
 
 
