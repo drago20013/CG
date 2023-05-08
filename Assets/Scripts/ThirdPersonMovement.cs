@@ -15,8 +15,11 @@ public class ThirdPersonMovement : MonoBehaviour
     private float lookRotation;
     public bool grounded;
 
-    public CollectableItems antiGravity;
+    public CollectableItems potions;
     public UIController uiController;
+
+    private bool hasKeyPressed = false;
+
 
     //runs once 
     void Start()
@@ -43,21 +46,42 @@ public class ThirdPersonMovement : MonoBehaviour
     //function that checks if "E" key is pressed, and then sets rb.gravity to false for 10 seconds
     public void OnE(InputAction.CallbackContext context)
     {
-        if (antiGravity.antiGravityPower)
-        {
-            onPowerActivate();
+        // UnityEngine.Debug.Log(potions.availablePotions.Count);
+        if (context.started) {
+            if (potions.chosenPotion == "antiGravity")
+            {
+                potions.usePotion();
+                antiGravityActivate();
+            }
+            else if(potions.chosenPotion == "increaseWeight") 
+            {
+                potions.usePotion();
+                increaseWeightActivate();
+            }
         }
+
     }
 
-    public void onPowerActivate()
+    public void OnTab(InputAction.CallbackContext context)
+    {
+        UnityEngine.Debug.Log("tabPressed");
+        potions.OnTogglePotion();
+    }
+
+    public void antiGravityActivate()
     {
         antiGravityStartTime = Time.time;
-        antiGravity.antiGravityPower = false;
         rb.useGravity = false;
+    }
+
+     public void increaseWeightActivate()
+    {
+        UnityEngine.Debug.Log("increaseWeightActivate");
     }
 
     void Update()
     {
+        hasKeyPressed = false;
         if (antiGravityStartTime != 0.0f)
         {
             float elapsedTime = Time.time - antiGravityStartTime;
