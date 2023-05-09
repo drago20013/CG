@@ -12,4 +12,7 @@
             <ui:Label text="##:##" display-tooltip-when-elided="true" name="buf-time" enable-rich-text="true" class="label-style" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:VisualElement name="potion" style="justify-content: flex-end; align-items: flex-start;">
+        <ui:Label display-tooltip-when-elided="true" name="potion-image" style="justify-content: flex-end; align-items: flex-start; width: 100px; height: 100px; margin-left: 22px; margin-right: 22px; margin-top: 22px; margin-bottom: 22px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-color: rgba(56, 56, 56, 0);" />
+    </ui:VisualElement>
 </ui:UXML>

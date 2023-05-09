@@ -2,59 +2,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class CollectableItems : MonoBehaviour
 {
-    //create a variable for the powers held by player
-    // public bool antiGravityPower;
-    // public bool increaseWeightPower;
-
     public string chosenPotion;
+    //public bool potionAvailable = false;
 
     public List<string> availablePotions = new List<string>();
 
-    public PotionToDisplay potionToDisplay;
-
-
-    private void Start() 
-    {
-
-    }
-
+    public UIController uiController;
 
     private void OnTriggerEnter(Collider other)
     {
         // Destroy the collectible item
         if (other.gameObject.layer == 6)
         {
+            if (other.gameObject.tag == "Cheese")
+                loadScene2();
+            //potionAvailable = true;
             string potionName = other.gameObject.tag;
             Destroy(other.gameObject);
-            UnityEngine.Debug.Log(tag);
+            UnityEngine.Debug.Log(potionName);
             availablePotions.Insert(0,potionName);
-            this.changeImage();
+            changeImage();
         }
+    }
+
+    private void loadScene2() {
+        SceneManager.LoadScene("Level2");
     }
 
     void changeImage() 
     {
-        UnityEngine.Debug.Log(this.availablePotions.Count);
+        UnityEngine.Debug.Log(availablePotions.Count);
         if (availablePotions.Count != 0) 
         {
-            this.chosenPotion = this.availablePotions[0];
-            potionToDisplay.changeImage(this.chosenPotion);
+            uiController.changeImage(availablePotions[0]);
+            chosenPotion = availablePotions[0];
 
         } else {
-            potionToDisplay.changeImage(null);
+            uiController.changeImage("");
+            chosenPotion = "";
         }
     }
 
 
     public void usePotion() 
     {
-        UnityEngine.Debug.Log(availablePotions);
-        this.availablePotions.RemoveAt(0);
-        this.changeImage();
+        //UnityEngine.Debug.Log(availablePotions);
+        if (availablePotions.Count > 0) {
+            //potionAvailable = true;
+            availablePotions.RemoveAt(0);
+        }
+        else { 
+            //potionAvailable = false; 
+        }
+        changeImage();
     }
 
     // shift, f.e. [0,1,2] becomes [1,2,0] 
@@ -65,8 +69,7 @@ public class CollectableItems : MonoBehaviour
             string lastElement = availablePotions[length - 1];
             availablePotions.RemoveAt(length - 1);
             availablePotions.Insert(0, lastElement);
-            this.changeImage();
-
+            changeImage();
         }
     }
 }

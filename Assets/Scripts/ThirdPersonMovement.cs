@@ -9,8 +9,8 @@ using UnityEngine.InputSystem;
 public class ThirdPersonMovement : MonoBehaviour
 {
     public Rigidbody rb;
-    public GameObject camHolder;
-    public float speed, sensitivity, maxForce, jumpForce, gravity, antiGravityStartTime;
+    public Transform cam;
+    public float speed, sensitivity, maxForce, jumpForce, gravity, potionTime, smoothTime;
     private Vector2 move, look;
     private float lookRotation;
     public bool grounded;
@@ -18,13 +18,14 @@ public class ThirdPersonMovement : MonoBehaviour
     public CollectableItems potions;
     public UIController uiController;
 
-    private bool hasKeyPressed = false;
+    private float turnSmoothVel;
 
 
     //runs once 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        smoothTime = 0.1f;
     }
 
 
@@ -43,53 +44,69 @@ public class ThirdPersonMovement : MonoBehaviour
         Jump();
     }
 
-    //function that checks if "E" key is pressed, and then sets rb.gravity to false for 10 seconds
+    //function that checks if "E" key is pressed, and then activate potion for 10 seconds
     public void OnE(InputAction.CallbackContext context)
     {
-        // UnityEngine.Debug.Log(potions.availablePotions.Count);
         if (context.started) {
-            if (potions.chosenPotion == "antiGravity")
-            {
-                potions.usePotion();
-                antiGravityActivate();
-            }
-            else if(potions.chosenPotion == "increaseWeight") 
-            {
-                potions.usePotion();
-                increaseWeightActivate();
-            }
+            //if (potions.potionAvailable)
+            //{
+                
+          
+                activatePower(potions.chosenPotion);
+            potions.usePotion();
+            //}
         }
-
     }
 
     public void OnTab(InputAction.CallbackContext context)
     {
-        UnityEngine.Debug.Log("tabPressed");
-        potions.OnTogglePotion();
+        if (context.started)
+        {
+            potions.OnTogglePotion();
+        }
+    }
+
+    void activatePower(String power)
+    {
+        if( power == "antiGravity")
+        {
+            antiGravityActivate();
+        }
+        else if (power == "increaseWeight")
+        {
+            increaseWeightActivate();
+        }
     }
 
     public void antiGravityActivate()
     {
-        antiGravityStartTime = Time.time;
+        ResetPowers();
+        potionTime = Time.time;
         rb.useGravity = false;
     }
 
-     public void increaseWeightActivate()
+    public void increaseWeightActivate()
     {
-        UnityEngine.Debug.Log("increaseWeightActivate");
+       ResetPowers();
+       potionTime = Time.time;
+       rb.mass = 15;
+    }
+
+    void ResetPowers() {
+        potionTime = 0;
+        rb.useGravity = true;
+        rb.mass = 1;
     }
 
     void Update()
     {
-        hasKeyPressed = false;
-        if (antiGravityStartTime != 0.0f)
+        if (potionTime != 0.0f)
         {
-            float elapsedTime = Time.time - antiGravityStartTime;
+            float elapsedTime = Time.time - potionTime;
             uiController.DisplayBufTime(10 - elapsedTime);
             if (elapsedTime > 10)
-            { 
-                antiGravityStartTime = 0;
-                rb.useGravity = true;
+            {
+                ResetPowers();
             }
         }
     }
@@ -99,7 +116,6 @@ public class ThirdPersonMovement : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-
     }
 
 
@@ -107,14 +123,15 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         Look();
     }
+    Vector3 direction = new Vector3();
 
     void Move()
     {
         Vector3 currentVelocity = rb.velocity;
-        Vector3 targetVelocity = new Vector3(move.x, 0, move.y);
+        Vector3 targetVelocity = new Vector3(move.y, 0, -move.x);
+     
+        targetVelocity = Quaternion.Euler(0f, cam.eulerAngles.y - 90, 0f) * targetVelocity;
         targetVelocity *= speed;
-
-        targetVelocity = transform.TransformDirection(targetVelocity);
 
         Vector3 velocityChange = (targetVelocity - currentVelocity);
         velocityChange = new Vector3(velocityChange.x, 0f, velocityChange.z);
@@ -126,11 +143,14 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void Look()
     {
-        transform.Rotate(Vector3.up * look.x * sensitivity);
-        //lookRotation += (-look.y * sensitivity);
+        direction = new Vector3(move.y, 0f, -move.x);
+        if(direction.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y - 90.0f;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, smoothTime);
 
-        //lookRotation = Mathf.Clamp(lookRotation, -90, 90);
-        camHolder.transform.eulerAngles = new Vector3(0f, camHolder.transform.eulerAngles.y, camHolder.transform.eulerAngles.z);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
     }
 
     void Jump()
