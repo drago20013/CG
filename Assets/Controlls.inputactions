@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchController",
+                    "type": "Button",
+                    "id": "9962e278-c7f6-4b3d-9276-270a919ab6b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -342,6 +351,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Quit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6bcda735-0b0f-4c67-93bd-f6238db24c89",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SwitchController",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

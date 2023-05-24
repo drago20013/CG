@@ -11,6 +11,8 @@ public class CollectableItems : MonoBehaviour
 
     public List<string> availablePotions = new List<string>();
 
+    public bool triggerCone = false;
+
     public UIController uiController;
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +28,9 @@ public class CollectableItems : MonoBehaviour
             UnityEngine.Debug.Log(potionName);
             availablePotions.Insert(0,potionName);
             changeImage();
+        }
+        else if (other.gameObject.tag == "triggerCone") {
+            triggerCone = true;
         }
     }
 
