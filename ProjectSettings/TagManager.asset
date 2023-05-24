@@ -7,6 +7,7 @@ TagManager:
   - antiGravity
   - increaseWeight
   - Cheese
+  - triggerCone
   layers:
   - Default
   - TransparentFX

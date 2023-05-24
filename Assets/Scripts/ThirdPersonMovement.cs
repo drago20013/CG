@@ -15,9 +15,9 @@ public class ThirdPersonMovement : MonoBehaviour
     private float lookRotation;
     public bool grounded;
 
-    public CollectableItems potions;
+    public CollectableItems collectableItems;
     public UIController uiController;
-
+    public GameObject sponge;
     private float turnSmoothVel;
 
 
@@ -44,16 +44,22 @@ public class ThirdPersonMovement : MonoBehaviour
         Jump();
     }
 
+    public void OnF(InputAction.CallbackContext context)
+    {
+        if (collectableItems.triggerCone == true) {
+            switchControllerToSponge();
+        }
+    }
+
     //function that checks if "E" key is pressed, and then activate potion for 10 seconds
     public void OnE(InputAction.CallbackContext context)
     {
         if (context.started) {
-            //if (potions.potionAvailable)
+            //if (collectableItems.potionAvailable)
             //{
-                
-          
-                activatePower(potions.chosenPotion);
-            potions.usePotion();
+            
+            activatePower(collectableItems.chosenPotion);
+            collectableItems.usePotion();
             //}
         }
     }
@@ -62,8 +68,19 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (context.started)
         {
-            potions.OnTogglePotion();
+            collectableItems.OnTogglePotion();
         }
+    }
+
+    public void switchControllerToSponge() {
+        gameObject.SetActive(false);
+        SpongeController input = sponge.GetComponent<SpongeController>();
+        input.enabled = true;
+        GameObject fakeRat = sponge.transform.GetChild(1).gameObject;
+        GameObject triggerCone = sponge.transform.GetChild(0).gameObject;
+        fakeRat.SetActive(true);
+        triggerCone.SetActive(false);
+        UnityEngine.Debug.Log("Controller IS Switched");
     }
 
     void activatePower(String power)
