@@ -12,11 +12,11 @@ public class SpongeOnWaterTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 4){
-            UnityEngine.Debug.Log("Hello");
-            // now we can use Activate
-            activateIcon.SetActive(true);
-            //SpongeOnWater = true;
+        if(other.gameObject.layer == 4) {
+            SpongeController controller = gameObject.GetComponent<SpongeController>();
+            if (controller.enabled == false) {
+                activateIcon.SetActive(true);
+                }
             
         }
     }
