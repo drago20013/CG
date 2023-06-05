@@ -11,7 +11,7 @@ public class CollectableItems : MonoBehaviour
 
     public List<string> availablePotions = new List<string>();
 
-    public bool triggerCone = false;
+    // public bool triggerCone = false;
 
     public UIController uiController;
 
@@ -29,9 +29,9 @@ public class CollectableItems : MonoBehaviour
             availablePotions.Insert(0,potionName);
             changeImage();
         }
-        else if (other.gameObject.tag == "triggerCone") {
-            triggerCone = true;
-        }
+        // else if (other.gameObject.tag == "triggerCone") {
+        //     triggerCone = true;
+        // }
     }
 
     private void loadScene2() {

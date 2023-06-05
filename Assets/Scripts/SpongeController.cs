@@ -20,11 +20,11 @@ public class SpongeController : MonoBehaviour
 
     public void OnF(InputAction.CallbackContext context) 
     {
-        if(context.performed)
-            switchControllerToSponge();
+        if(context.performed && this.enabled == true)
+            switchControllerToUser();
     }
 
-    public void switchControllerToSponge() {
+    public void switchControllerToUser() {
         enabled = false;
         player.SetActive(true);
         GameObject fakeRat = gameObject.transform.GetChild(1).gameObject;
@@ -48,7 +48,6 @@ public class SpongeController : MonoBehaviour
 
     void Move()
     {
-        UnityEngine.Debug.Log("AaAAAAAAAAAAAAAA");
         Vector3 currentVelocity = rb.velocity;
         Vector3 targetVelocity = new Vector3(move.y, 0, -move.x);
      

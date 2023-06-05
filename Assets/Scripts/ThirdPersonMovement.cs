@@ -46,7 +46,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void OnF(InputAction.CallbackContext context)
     {
-        if (collectableItems.triggerCone == true) {
+        GameObject triggerCone = sponge.transform.GetChild(0).gameObject;
+        float distanceToTriggerCone = Vector3.Distance(triggerCone.transform.position, gameObject.transform.position);
+        if (context.performed && distanceToTriggerCone <= 4.0 && triggerCone.activeSelf == true) {
             switchControllerToSponge();
         }
     }
