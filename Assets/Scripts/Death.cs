@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class Death : MonoBehaviour
 {
     public UIController uiController;
-    //public AudioClip deathSound;
     AudioSource audioSource;
+    public AudioClip pain;
 
     void Start(){
         audioSource = GetComponent<AudioSource>();
@@ -26,7 +26,10 @@ public class Death : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 7){
+            audioSource.clip = pain;
+            audioSource.enabled = true;
             audioSource.Play();
+
             UnityEngine.Debug.Log("You've died!!");
             Invoke("loadScene", 0.6f);
             Rigidbody rat_rb = GetComponent<Rigidbody>();
@@ -35,7 +38,6 @@ public class Death : MonoBehaviour
     }
 
     private void loadScene(){
-        SceneManager.LoadScene("Level1");
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

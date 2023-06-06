@@ -21,11 +21,10 @@ public class CollectableItems : MonoBehaviour
         if (other.gameObject.layer == 6)
         {
             if (other.gameObject.tag == "Cheese")
-                loadScene2();
+                loadNextScene();
             //potionAvailable = true;
             string potionName = other.gameObject.tag;
             Destroy(other.gameObject);
-            UnityEngine.Debug.Log(potionName);
             availablePotions.Insert(0,potionName);
             changeImage();
         }
@@ -34,8 +33,13 @@ public class CollectableItems : MonoBehaviour
         // }
     }
 
-    private void loadScene2() {
-        SceneManager.LoadScene("Level2");
+    private void loadNextScene() {
+        string level = SceneManager.GetActiveScene().name;
+        int currentLevel = level[5] - '0';
+        currentLevel++;
+        SceneManager.LoadScene("Level"+ currentLevel);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
     void changeImage() 

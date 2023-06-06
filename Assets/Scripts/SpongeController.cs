@@ -31,7 +31,7 @@ public class SpongeController : MonoBehaviour
         GameObject triggerCone = gameObject.transform.GetChild(0).gameObject;
         fakeRat.SetActive(false);
         triggerCone.SetActive(true);
-        UnityEngine.Debug.Log("Controller IS Switched");
+        UnityEngine.Debug.Log("Controller IS Switched to user");
     }
 
     void Start(){

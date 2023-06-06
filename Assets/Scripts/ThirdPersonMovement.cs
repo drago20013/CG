@@ -20,18 +20,25 @@ public class ThirdPersonMovement : MonoBehaviour
     public GameObject sponge;
     private float turnSmoothVel;
 
+    public AudioClip walk, jump;
+    AudioSource audioSource;
+    public bool shouldPlayWalkSound, isPlaying;
 
     //runs once 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         smoothTime = 0.1f;
+        audioSource = GetComponent<AudioSource>();
+        shouldPlayWalkSound = false;
+        isPlaying = false;
     }
 
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        move = context.ReadValue<Vector2>();
+            move = context.ReadValue<Vector2>();
+            shouldPlayWalkSound = true;
     }
 
     public void OnLook(InputAction.CallbackContext context)
@@ -48,7 +55,7 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         GameObject triggerCone = sponge.transform.GetChild(0).gameObject;
         float distanceToTriggerCone = Vector3.Distance(triggerCone.transform.position, gameObject.transform.position);
-        if (context.performed && distanceToTriggerCone <= 4.0 && triggerCone.activeSelf == true) {
+        if (this.enabled == true && context.performed && distanceToTriggerCone <= 4.0 && triggerCone.activeSelf == true) {
             switchControllerToSponge();
         }
     }
@@ -75,13 +82,13 @@ public class ThirdPersonMovement : MonoBehaviour
     }
 
     public void switchControllerToSponge() {
-        gameObject.SetActive(false);
         SpongeController input = sponge.GetComponent<SpongeController>();
-        input.enabled = true;
         GameObject fakeRat = sponge.transform.GetChild(1).gameObject;
         GameObject triggerCone = sponge.transform.GetChild(0).gameObject;
         fakeRat.SetActive(true);
         triggerCone.SetActive(false);
+        gameObject.SetActive(false);
+        input.enabled = true;
         UnityEngine.Debug.Log("Controller IS Switched");
     }
 
@@ -128,6 +135,34 @@ public class ThirdPersonMovement : MonoBehaviour
                 ResetPowers();
             }
         }
+
+
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            shouldPlayWalkSound = true;
+        }
+        else
+        {
+            shouldPlayWalkSound = false;
+        }
+
+        if (shouldPlayWalkSound && !isPlaying)
+        {
+            isPlaying = true;
+            audioSource.clip = walk;
+            audioSource.enabled = true;
+            audioSource.loop = true;
+            audioSource.volume = 0.5f;
+            audioSource.Play();
+        }
+        else if(!shouldPlayWalkSound && isPlaying)
+        {
+            isPlaying = false;
+            audioSource.Stop();
+            audioSource.enabled = false;
+            audioSource.loop = false ;
+        }
+
     }
 
 
@@ -135,6 +170,7 @@ public class ThirdPersonMovement : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        
     }
 
 
@@ -158,6 +194,7 @@ public class ThirdPersonMovement : MonoBehaviour
         Vector3.ClampMagnitude(velocityChange, maxForce);
 
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
+        if (rb.velocity.magnitude < 0.2) shouldPlayWalkSound = false; 
     }
 
     void Look()
@@ -179,6 +216,10 @@ public class ThirdPersonMovement : MonoBehaviour
         if (grounded)
         {
             jumpForces = Vector3.up * jumpForce;
+            audioSource.clip = jump;
+            audioSource.enabled = true;
+            audioSource.loop = false;
+            audioSource.Play();
         }
 
         rb.AddForce(jumpForces, ForceMode.VelocityChange);
