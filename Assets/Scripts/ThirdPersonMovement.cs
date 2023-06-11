@@ -33,7 +33,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public GameObject crosshair;
     public LayerMask aimColliderLaterMask = new LayerMask();
-    public Transform lazerTransform;
+    public GameObject lazerTransform;
 
     //runs once 
     void Start()
@@ -83,10 +83,12 @@ public class ThirdPersonMovement : MonoBehaviour
         if (context.started) {
             UnityEngine.Debug.Log("STARTED");
             shooting = true;
+            lazerTransform.SetActive(true);
         }
         else if(context.canceled) {
             UnityEngine.Debug.Log("Canceled");
             shooting = false;
+            lazerTransform.SetActive(false);
         }
     }
 
@@ -173,8 +175,8 @@ public class ThirdPersonMovement : MonoBehaviour
             Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
             Ray ray = Camera.main.ScreenPointToRay(screenCenter);
             if (Physics.Raycast(ray, out RaycastHit raycasetHit, 999f, aimColliderLaterMask)){
-                UnityEngine.Debug.Log(lazerTransform.position);
-                lazerTransform.position = raycasetHit.point;
+                UnityEngine.Debug.Log(lazerTransform.transform.position);
+                lazerTransform.transform.position = raycasetHit.point;
             }
         }
 
