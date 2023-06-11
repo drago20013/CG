@@ -6508,7 +6508,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873075276}
-  m_LocalRotation: {x: 0.17061056, y: -0.68621576, z: 0.17061056, w: 0.68621576}
+  m_LocalRotation: {x: 0.17061058, y: -0.6862157, z: 0.17061056, w: 0.68621576}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9918,7 +9918,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347693641}
-  m_LocalRotation: {x: 0.13853116, y: -0.6934041, z: 0.1385312, w: 0.693404}
+  m_LocalRotation: {x: 0.13853118, y: -0.693404, z: 0.13853121, w: 0.69340396}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15694,6 +15694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiController: {fileID: 223359128}
+  pain: {fileID: 8300000, guid: 8d98e778bdc7d48f3bb0418ee100f18b, type: 3}
 --- !u!114 &2134165555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15894,6 +15895,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 27308e5f-01ea-485d-ac21-9d582c410151
     m_ActionName: Player/StartGame[/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2134165557}
+        m_TargetAssemblyTypeName: ThirdPersonMovement, Assembly-CSharp
+        m_MethodName: OnZoom
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9a299692-2248-4ff2-86f0-43b6e6df6517
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -15913,6 +15930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2134165558}
   cam: {fileID: 1346916796}
+  cinemaCam: {fileID: 783444685}
   speed: 10
   sensitivity: 0.1
   maxForce: 1
@@ -15924,6 +15942,11 @@ MonoBehaviour:
   collectableItems: {fileID: 2134165555}
   uiController: {fileID: 223359128}
   sponge: {fileID: 919132149369085352}
+  walk: {fileID: 8300000, guid: f263ec31abcf4425b99a30d36f09c354, type: 3}
+  jump: {fileID: 8300000, guid: 14c44e0890f0e4b9b879c4a80f76a879, type: 3}
+  shouldPlayWalkSound: 0
+  isPlaying: 0
+  scoped: 0
 --- !u!54 &2134165558
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15978,10 +16001,10 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134165553}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8d98e778bdc7d48f3bb0418ee100f18b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f263ec31abcf4425b99a30d36f09c354, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
