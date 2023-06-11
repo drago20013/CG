@@ -4,16 +4,22 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 
 public class ThirdPersonMovement : MonoBehaviour
 {
     public Rigidbody rb;
     public Transform cam;
+    public CinemachineFreeLook cinemaCam;
+    private float normalFov = 50f;
+    private float scopedFov = 15f;
+    private Transform zoomTarget;
     public float speed, sensitivity, maxForce, jumpForce, gravity, potionTime, smoothTime;
     private Vector2 move, look;
     private float lookRotation;
     public bool grounded;
+    public bool shooting = true;
 
     public CollectableItems collectableItems;
     public UIController uiController;
@@ -23,6 +29,11 @@ public class ThirdPersonMovement : MonoBehaviour
     public AudioClip walk, jump;
     AudioSource audioSource;
     public bool shouldPlayWalkSound, isPlaying;
+    public bool scoped = false;
+
+    public GameObject crosshair;
+    public LayerMask aimColliderLaterMask = new LayerMask();
+    public GameObject lazerTransform;
 
     //runs once 
     void Start()
@@ -30,6 +41,7 @@ public class ThirdPersonMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         smoothTime = 0.1f;
         audioSource = GetComponent<AudioSource>();
+        zoomTarget = gameObject.transform.GetChild(2).gameObject.transform;
         shouldPlayWalkSound = false;
         isPlaying = false;
     }
@@ -51,6 +63,12 @@ public class ThirdPersonMovement : MonoBehaviour
         Jump();
     }
 
+    public void OnZoom(InputAction.CallbackContext context)
+    {
+        UnityEngine.Debug.Log("RIGHT BUTTON IS PRESSED");
+        Zoom();
+    }
+
     public void OnF(InputAction.CallbackContext context)
     {
         GameObject triggerCone = sponge.transform.GetChild(0).gameObject;
@@ -59,6 +77,21 @@ public class ThirdPersonMovement : MonoBehaviour
             switchControllerToSponge();
         }
     }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        if (context.started) {
+            UnityEngine.Debug.Log("STARTED");
+            shooting = true;
+            lazerTransform.SetActive(true);
+        }
+        else if(context.canceled) {
+            UnityEngine.Debug.Log("Canceled");
+            shooting = false;
+            lazerTransform.SetActive(false);
+        }
+    }
+
 
     //function that checks if "E" key is pressed, and then activate potion for 10 seconds
     public void OnE(InputAction.CallbackContext context)
@@ -133,6 +166,17 @@ public class ThirdPersonMovement : MonoBehaviour
             if (elapsedTime > 10)
             {
                 ResetPowers();
+            }
+        }
+
+
+        if (shooting) 
+        {
+            Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+            if (Physics.Raycast(ray, out RaycastHit raycasetHit, 999f, aimColliderLaterMask)){
+                UnityEngine.Debug.Log(lazerTransform.transform.position);
+                lazerTransform.transform.position = raycasetHit.point;
             }
         }
 
@@ -224,6 +268,37 @@ public class ThirdPersonMovement : MonoBehaviour
 
         rb.AddForce(jumpForces, ForceMode.VelocityChange);
     }
+
+    void Zoom()
+    {
+        scoped = !scoped;
+        if (scoped) {
+            UnityEngine.Debug.Log("Scoping is activated");
+            onScoped();
+        } else if (!scoped) {
+            UnityEngine.Debug.Log("Scoping is deactivated");
+            onUnScoped();
+        }
+    }
+
+    void onScoped()
+    {
+        crosshair.SetActive(true);
+        cinemaCam.m_CommonLens = true;
+        cinemaCam.m_Lens.FieldOfView = scopedFov;
+        cinemaCam.LookAt = zoomTarget;        
+    }
+
+    void onUnScoped()
+    {
+        crosshair.SetActive(false);
+        cinemaCam.m_Lens.FieldOfView = normalFov;
+        // cinemaCam.m_CommonLens = false;
+        cinemaCam.LookAt = gameObject.transform;
+        cinemaCam.Follow = gameObject.transform;
+
+    }
+
 
     public void SetGrounded(bool state)
     {
