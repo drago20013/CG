@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,10 +15,11 @@ public class UIController : MonoBehaviour
     public Sprite redPotion, bluePotion;
     private Label choosenPotion;
 
+    public VisualElement root;
     // Start is called before the first frame update
     void Start()
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
+        root = GetComponent<UIDocument>().rootVisualElement;
         bufTime = root.Q<Label>("buf-time");
         liveTime = root.Q<Label>("time");
         choosenPotion = root.Q<Label>("potion-image");
@@ -53,7 +55,7 @@ public class UIController : MonoBehaviour
         {
             if (timeRemaining > 0)
             {
-                timeRemaining -= Time.deltaTime;
+                // timeRemaining -= Time.deltaTime;
                 DisplayLiveTime(timeRemaining);
             }
             else

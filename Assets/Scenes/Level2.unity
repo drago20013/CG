@@ -1984,7 +1984,7 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: b40e59639ce1679408255c694baa133c, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: 097e6cb6add442e4c8bd318ea029a302, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: b86eb4b535c43964583f158f1d0a99dc, type: 3}
   m_SortingOrder: 0
@@ -9667,7 +9667,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346916793}
-  m_LocalRotation: {x: 0.15457787, y: -0.69000417, z: 0.15457787, w: 0.69000417}
+  m_LocalRotation: {x: 0.15457785, y: -0.6900042, z: 0.15457788, w: 0.6900041}
   m_LocalPosition: {x: 87.17, y: 54.640003, z: -143.54}
   m_LocalScale: {x: 1.8802142, y: 1.8802137, z: 1.8802142}
   m_ConstrainProportionsScale: 0
@@ -15170,7 +15170,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088696244}
-  m_LocalRotation: {x: 0.15457785, y: -0.6900041, z: 0.15457784, w: 0.6900042}
+  m_LocalRotation: {x: 0.15457782, y: -0.69000417, z: 0.15457785, w: 0.69000417}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15583,6 +15583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2134165558}
   cam: {fileID: 1346916796}
+  cinemaCam: {fileID: 0}
   speed: 10
   sensitivity: 0.1
   maxForce: 1
@@ -15591,6 +15592,7 @@ MonoBehaviour:
   potionTime: 0
   smoothTime: 0.1
   grounded: 1
+  shooting: 1
   collectableItems: {fileID: 2134165555}
   uiController: {fileID: 223359128}
   sponge: {fileID: 919132149369085352}
@@ -15598,6 +15600,12 @@ MonoBehaviour:
   jump: {fileID: 8300000, guid: 14c44e0890f0e4b9b879c4a80f76a879, type: 3}
   shouldPlayWalkSound: 0
   isPlaying: 0
+  scoped: 0
+  crosshair: {fileID: 0}
+  aimColliderLaterMask:
+    serializedVersion: 2
+    m_Bits: 0
+  lazerTransform: {fileID: 0}
 --- !u!54 &2134165558
 Rigidbody:
   m_ObjectHideFlags: 0
