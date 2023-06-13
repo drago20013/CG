@@ -5,7 +5,46 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using UnityEngine.UIElements;
 
+
+public class QuestionItem {
+        public string question;
+        public string answer;
+
+        public QuestionItem(string question, string answer){
+            this.question = question;
+            this.answer = answer;
+        }
+    }
+
+public class Questions {
+    private int current_question = -1;
+
+    
+    public List<QuestionItem> questions = new List<QuestionItem>{
+        new QuestionItem("Show sodium","sodium"),
+        new QuestionItem("What is the most common organic element","carbon"),
+        new QuestionItem("What is the most conductive metal on the periodic table?","silver"),
+        new QuestionItem("Aluminium would have similar properties to which of the following chemical elements?","gallium"),
+        new QuestionItem("What is the most metallic element on the periodic table?","francium"),
+        new QuestionItem("Known as the densest natural element, this heavy metal is often used in electrical contacts or fountain pens","osmium"),
+        new QuestionItem("This heavy metal is often used to make surgical devices as part of an alloy because it can resist corrosion and does not irritate the body’s tissues","tantalum"),
+
+    };
+
+    public void addQuestion(string question, string answer) {
+        questions.Add(new QuestionItem(question, answer));
+    }
+
+    public QuestionItem getQuestion(){
+        current_question++;
+        if (current_question < questions.Count ){
+            return questions[current_question];
+        }
+        return new QuestionItem("YOu won", "mf");
+    }
+}
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -35,22 +74,40 @@ public class ThirdPersonMovement : MonoBehaviour
     public LayerMask aimColliderLaterMask = new LayerMask();
     public GameObject lazerTransform;
 
+
+    public Questions questions = new Questions();
+
+    private string question;
+    private string answer;
+
+    public Label questionLabel;
+    public Label answerLabel;
+
+
+
     //runs once 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         smoothTime = 0.1f;
         audioSource = GetComponent<AudioSource>();
         zoomTarget = gameObject.transform.GetChild(2).gameObject.transform;
         shouldPlayWalkSound = false;
         isPlaying = false;
+        QuestionItem questionItem = questions.getQuestion();
+        question = questionItem.question;
+        answer = questionItem.answer;
+
+        // Show GUI element with questions[it].question
+        questionLabel = uiController.root.Q<Label>("question");
+        questionLabel.text = question;
     }
 
 
     public void OnMove(InputAction.CallbackContext context)
     {
-            move = context.ReadValue<Vector2>();
-            shouldPlayWalkSound = true;
+        move = context.ReadValue<Vector2>();
+        shouldPlayWalkSound = true;
     }
 
     public void OnLook(InputAction.CallbackContext context)
@@ -65,7 +122,6 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void OnZoom(InputAction.CallbackContext context)
     {
-        UnityEngine.Debug.Log("RIGHT BUTTON IS PRESSED");
         Zoom();
     }
 
@@ -81,12 +137,10 @@ public class ThirdPersonMovement : MonoBehaviour
     public void OnShoot(InputAction.CallbackContext context)
     {
         if (context.started) {
-            UnityEngine.Debug.Log("STARTED");
             shooting = true;
             lazerTransform.SetActive(true);
         }
         else if(context.canceled) {
-            UnityEngine.Debug.Log("Canceled");
             shooting = false;
             lazerTransform.SetActive(false);
         }
@@ -122,7 +176,6 @@ public class ThirdPersonMovement : MonoBehaviour
         triggerCone.SetActive(false);
         gameObject.SetActive(false);
         input.enabled = true;
-        UnityEngine.Debug.Log("Controller IS Switched");
     }
 
     void activatePower(String power)
@@ -175,9 +228,26 @@ public class ThirdPersonMovement : MonoBehaviour
             Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
             Ray ray = Camera.main.ScreenPointToRay(screenCenter);
             if (Physics.Raycast(ray, out RaycastHit raycasetHit, 999f, aimColliderLaterMask)){
-                UnityEngine.Debug.Log(lazerTransform.transform.position);
                 lazerTransform.transform.position = raycasetHit.point;
             }
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                UnityEngine.Debug.Log(question);
+
+
+                if (hit.collider.tag == this.answer)
+                {
+                    QuestionItem questionItem = questions.getQuestion();
+                    question = questionItem.question;
+                    answer = questionItem.answer;
+                    questionLabel = uiController.root.Q<Label>("question");
+                    questionLabel.text = question;
+
+                }
+
+            }
+
         }
 
 
@@ -273,10 +343,8 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         scoped = !scoped;
         if (scoped) {
-            UnityEngine.Debug.Log("Scoping is activated");
             onScoped();
         } else if (!scoped) {
-            UnityEngine.Debug.Log("Scoping is deactivated");
             onUnScoped();
         }
     }
