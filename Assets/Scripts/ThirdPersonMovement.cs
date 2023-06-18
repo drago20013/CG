@@ -26,11 +26,8 @@ public class Questions {
         new QuestionItem("Show sodium","sodium"),
         new QuestionItem("What is the most common organic element","carbon"),
         new QuestionItem("What is the most conductive metal on the periodic table?","silver"),
-        new QuestionItem("Aluminium would have similar properties to which of the following chemical elements?","gallium"),
         new QuestionItem("What is the most metallic element on the periodic table?","francium"),
         new QuestionItem("Known as the densest natural element, this heavy metal is often used in electrical contacts or fountain pens","osmium"),
-        new QuestionItem("This heavy metal is often used to make surgical devices as part of an alloy because it can resist corrosion and does not irritate the body’s tissues","tantalum"),
-
     };
 
     public void addQuestion(string question, string answer) {
@@ -42,7 +39,7 @@ public class Questions {
         if (current_question < questions.Count ){
             return questions[current_question];
         }
-        return new QuestionItem("YOu won", "mf");
+        return new QuestionItem("You won", "mf");
     }
 }
 
@@ -73,6 +70,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public GameObject crosshair;
     public LayerMask aimColliderLaterMask = new LayerMask();
     public GameObject lazerTransform;
+    public GameObject videoClip;
 
 
     public Questions questions = new Questions();
@@ -122,7 +120,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void OnZoom(InputAction.CallbackContext context)
     {
-        Zoom();
+        if (collectableItems.laserPointerEnable == true){
+            Zoom();
+        }
     }
 
     public void OnF(InputAction.CallbackContext context)
@@ -136,13 +136,15 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        if (context.started) {
-            shooting = true;
-            lazerTransform.SetActive(true);
-        }
-        else if(context.canceled) {
-            shooting = false;
-            lazerTransform.SetActive(false);
+        if (collectableItems.laserPointerEnable == true){
+            if (context.started) {
+                shooting = true;
+                lazerTransform.SetActive(true);
+            }
+            else if(context.canceled) {
+                shooting = false;
+                lazerTransform.SetActive(false);
+            }
         }
     }
 
@@ -221,7 +223,10 @@ public class ThirdPersonMovement : MonoBehaviour
                 ResetPowers();
             }
         }
-
+        if (collectableItems.laserPointerEnable == true){
+            GameObject fakeLaserTag = gameObject.transform.GetChild(3).gameObject;
+            fakeLaserTag.SetActive(true);
+        }
 
         if (shooting) 
         {
@@ -233,17 +238,17 @@ public class ThirdPersonMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                UnityEngine.Debug.Log(question);
-
-
                 if (hit.collider.tag == this.answer)
                 {
                     QuestionItem questionItem = questions.getQuestion();
                     question = questionItem.question;
+                    if (question == "You won"){
+                        videoClip.SetActive(true);
+                        Zoom();
+                    }
                     answer = questionItem.answer;
                     questionLabel = uiController.root.Q<Label>("question");
                     questionLabel.text = question;
-
                 }
 
             }
@@ -340,7 +345,8 @@ public class ThirdPersonMovement : MonoBehaviour
     }
 
     void Zoom()
-    {
+    {   
+
         scoped = !scoped;
         if (scoped) {
             onScoped();

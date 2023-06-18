@@ -35,7 +35,7 @@ public class SpongeController : MonoBehaviour
     }
 
     void Start(){
-        speed = 10;
+        speed = (float) 2.0;
         maxForce = 1;
     } 
 
