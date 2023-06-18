@@ -10,6 +10,7 @@ public class Death : MonoBehaviour
     public UIController uiController;
     AudioSource audioSource;
     public AudioClip pain;
+    public SpongeOnWaterTrigger spongeOnWaterTrigger;
 
     void Start(){
         audioSource = GetComponent<AudioSource>();
@@ -21,6 +22,7 @@ public class Death : MonoBehaviour
             UnityEngine.Debug.Log("Time's up, you've died!!");
             SceneManager.LoadScene("Level1");
         }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,13 +33,14 @@ public class Death : MonoBehaviour
             audioSource.Play();
 
             UnityEngine.Debug.Log("You've died!!");
-            Invoke("loadScene", 0.6f);
+            Invoke("loadScene", 1.0f);
             Rigidbody rat_rb = GetComponent<Rigidbody>();
             rat_rb.constraints = RigidbodyConstraints.FreezePosition;
         }
     }
 
     private void loadScene(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        UIControllerBusted.levelName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene("busted");
     }
 }

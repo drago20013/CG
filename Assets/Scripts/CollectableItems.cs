@@ -14,19 +14,27 @@ public class CollectableItems : MonoBehaviour
     // public bool triggerCone = false;
 
     public UIController uiController;
+    public bool laserPointerEnable = false;
 
     private void OnTriggerEnter(Collider other)
     {
         // Destroy the collectible item
         if (other.gameObject.layer == 6)
         {
-            if (other.gameObject.tag == "Cheese")
+            string objectTag = other.gameObject.tag;
+
+            if (objectTag == "Cheese")
                 loadNextScene();
-            //potionAvailable = true;
-            string potionName = other.gameObject.tag;
+            else if (objectTag == "laserPointer"){
+                UnityEngine.Debug.Log("LaserPointer is picked up");
+                laserPointerEnable = true;
+            }
+            else {
+                availablePotions.Insert(0,objectTag);
+                changeImage();
+            }
             Destroy(other.gameObject);
-            availablePotions.Insert(0,potionName);
-            changeImage();
+
         }
         // else if (other.gameObject.tag == "triggerCone") {
         //     triggerCone = true;

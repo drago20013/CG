@@ -15,6 +15,7 @@ TagManager:
   - osmium
   - francium
   - silver
+  - laserPointer
   layers:
   - Default
   - TransparentFX

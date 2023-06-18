@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="StartScene" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Images/busted.png?fileID=21300000&amp;guid=85cdba1fdcd964ad685c673a17be9d84&amp;type=3#busted&apos;); align-items: stretch; -unity-background-scale-mode: stretch-to-fill;" />
+</ui:UXML>
