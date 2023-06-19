@@ -25,9 +25,8 @@ public class UIControllerMenu : MonoBehaviour
         background = root.Q<VisualElement>("StartScene");
         b_level1.clicked += LoadLevel1;
         b_level2.clicked += LoadLevel2;
-        //b_level3 += Loa
-        // exitBtn = root.Q<Button>("Exit");
-        // exitBtn.clicked += Exit;
+        b_level3.clicked += LoadLevel3;
+
     }
 
     void LoadLevel1()
@@ -40,6 +39,11 @@ public class UIControllerMenu : MonoBehaviour
         SceneManager.LoadScene("Level2");
     }
 
+    void LoadLevel3()
+    {
+        SceneManager.LoadScene("Level3");
+    }
+
     public void ChooseLevelScene(InputAction.CallbackContext context)
     {
         b_level1.style.display = DisplayStyle.Flex;
@@ -49,8 +53,34 @@ public class UIControllerMenu : MonoBehaviour
         background.style.backgroundImage = new StyleBackground(chooseLevelScene);
     }
 
-    void Exit()
+    public void LoadCredits(InputAction.CallbackContext context)
     {
-        Application.Quit();
+        b_level1.style.display = DisplayStyle.None;
+        b_level2.style.display = DisplayStyle.None;
+        b_level3.style.display = DisplayStyle.None;
+
+        background.style.backgroundImage = new StyleBackground(authorScene);
+    }
+
+    void LoadMenu()
+    {
+        b_level1.style.display = DisplayStyle.None;
+        b_level2.style.display = DisplayStyle.None;
+        b_level3.style.display = DisplayStyle.None;
+
+        background.style.backgroundImage = new StyleBackground(startScene);
+    }
+        
+    public void Exit(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (background.style.backgroundImage == new StyleBackground(startScene))
+            {
+                Application.Quit();
+            }
+            else
+                LoadMenu();
+        }
     }
 }

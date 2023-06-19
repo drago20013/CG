@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18035345, g: 0.22579068, b: 0.30702788, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028414, g: 0.22571424, b: 0.3069228, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2194,8 +2194,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerIsRunning: 0
+  mouse: {fileID: 2134165553}
   redPotion: {fileID: 21300000, guid: 65ade9e95236b4f678ebcb7161bdf794, type: 3}
   bluePotion: {fileID: 21300000, guid: 2bc86d2aec4ce4bd39e68f538a12b66e, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 37d3445f91b184e259bf847f81ac64e1, type: 3}
   timeRemaining: 120
 --- !u!82 &223359129
 AudioSource:
@@ -16760,7 +16762,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036518124}
-  m_LocalRotation: {x: 0.17061052, y: 0.68621576, z: -0.17061052, w: 0.68621576}
+  m_LocalRotation: {x: 0.17061052, y: 0.68621576, z: -0.1706105, w: 0.68621576}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17463,6 +17465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiController: {fileID: 223359128}
   pain: {fileID: 8300000, guid: 8d98e778bdc7d48f3bb0418ee100f18b, type: 3}
+  spongeOnWaterTrigger: {fileID: 0}
 --- !u!114 &2134165556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17616,8 +17619,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 223359128}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: OnQuit
-        m_Mode: 1
+        m_MethodName: OnPause
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -17636,6 +17639,34 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 27308e5f-01ea-485d-ac21-9d582c410151
     m_ActionName: Player/StartGame[/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9a299692-2248-4ff2-86f0-43b6e6df6517
+    m_ActionName: Player/Zoom[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d2d22f13-161b-440c-80d4-1d819475a7c6
+    m_ActionName: Player/Restart[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a4e9f5d-d522-4e14-95b7-b61716357fc0
+    m_ActionName: Player/Credits[/Keyboard/b]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 223359128}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: OnContinue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 54977077-cedb-448c-b13b-302770aa43b4
+    m_ActionName: Player/UnPause[/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -17655,6 +17686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2134165558}
   cam: {fileID: 1346916796}
+  cinemaCam: {fileID: 0}
   speed: 10
   sensitivity: 0.1
   maxForce: 1
@@ -17663,13 +17695,22 @@ MonoBehaviour:
   potionTime: 0
   smoothTime: 0.1
   grounded: 1
+  shooting: 1
   collectableItems: {fileID: 2134165562}
   uiController: {fileID: 223359128}
+  uiDocument: {fileID: 0}
   sponge: {fileID: 0}
   walk: {fileID: 8300000, guid: f263ec31abcf4425b99a30d36f09c354, type: 3}
   jump: {fileID: 8300000, guid: 14c44e0890f0e4b9b879c4a80f76a879, type: 3}
   shouldPlayWalkSound: 0
   isPlaying: 0
+  scoped: 0
+  crosshair: {fileID: 0}
+  aimColliderLaterMask:
+    serializedVersion: 2
+    m_Bits: 0
+  lazerTransform: {fileID: 0}
+  videoClip: {fileID: 0}
 --- !u!54 &2134165558
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17732,6 +17773,7 @@ MonoBehaviour:
   chosenPotion: 
   availablePotions: []
   uiController: {fileID: 223359128}
+  laserPointerEnable: 0
 --- !u!82 &2134165563
 AudioSource:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+
 
 
 public class QuestionItem {
@@ -27,7 +29,7 @@ public class Questions {
         new QuestionItem("What is the most common organic element","carbon"),
         new QuestionItem("What is the most conductive metal on the periodic table?","silver"),
         new QuestionItem("What is the most metallic element on the periodic table?","francium"),
-        new QuestionItem("Known as the densest natural element, this heavy metal is often used in electrical contacts or fountain pens","osmium"),
+        new QuestionItem("Known as the densest natural element,\nthis heavy metal is often used in electrical contacts or fountain pens","osmium"),
     };
 
     public void addQuestion(string question, string answer) {
@@ -55,10 +57,11 @@ public class ThirdPersonMovement : MonoBehaviour
     private Vector2 move, look;
     private float lookRotation;
     public bool grounded;
-    public bool shooting = true;
+    public bool shooting = false;
 
     public CollectableItems collectableItems;
     public UIController uiController;
+    public GameObject uiDocument;
     public GameObject sponge;
     private float turnSmoothVel;
 
@@ -89,16 +92,18 @@ public class ThirdPersonMovement : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         smoothTime = 0.1f;
         audioSource = GetComponent<AudioSource>();
-        zoomTarget = gameObject.transform.GetChild(2).gameObject.transform;
+        if (SceneManager.GetActiveScene().name == "Level3")
+        {
+            zoomTarget = gameObject.transform.GetChild(2).gameObject.transform;
+            QuestionItem questionItem = questions.getQuestion();
+            question = questionItem.question;
+            answer = questionItem.answer;
+            // Show GUI element with questions[it].question
+            questionLabel = uiController.root.Q<Label>("question");
+            questionLabel.text = question;
+        }
         shouldPlayWalkSound = false;
         isPlaying = false;
-        QuestionItem questionItem = questions.getQuestion();
-        question = questionItem.question;
-        answer = questionItem.answer;
-
-        // Show GUI element with questions[it].question
-        questionLabel = uiController.root.Q<Label>("question");
-        questionLabel.text = question;
     }
 
 
@@ -234,25 +239,29 @@ public class ThirdPersonMovement : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(screenCenter);
             if (Physics.Raycast(ray, out RaycastHit raycasetHit, 999f, aimColliderLaterMask)){
                 lazerTransform.transform.position = raycasetHit.point;
-            }
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.tag == this.answer)
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
                 {
-                    QuestionItem questionItem = questions.getQuestion();
-                    question = questionItem.question;
-                    if (question == "You won"){
-                        videoClip.SetActive(true);
-                        Zoom();
+                    if (hit.collider.tag == this.answer)
+                    {
+                        QuestionItem questionItem = questions.getQuestion();
+                        question = questionItem.question;
+                        answer = questionItem.answer;
+                        questionLabel = uiController.root.Q<Label>("question");
+                        questionLabel.text = question;
+                        if (question == "You won")
+                        {
+                            videoClip.SetActive(true);
+                            Zoom();
+                            uiController.timerIsRunning = false;
+                            AudioSource backgroundSound = uiDocument.GetComponent<AudioSource>();
+                            backgroundSound.Stop();
+                        }
+
                     }
-                    answer = questionItem.answer;
-                    questionLabel = uiController.root.Q<Label>("question");
-                    questionLabel.text = question;
                 }
-
             }
-
+            
         }
 
 

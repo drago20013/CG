@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18035345, g: 0.22579068, b: 0.30702788, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028414, g: 0.22571424, b: 0.3069228, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1963,8 +1963,8 @@ GameObject:
   m_Component:
   - component: {fileID: 223359127}
   - component: {fileID: 223359126}
-  - component: {fileID: 223359128}
   - component: {fileID: 223359129}
+  - component: {fileID: 223359130}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -1986,7 +1986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 097e6cb6add442e4c8bd318ea029a302, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: b86eb4b535c43964583f158f1d0a99dc, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: ce91115e4cf99d746ad30732e9a9d7c0, type: 3}
   m_SortingOrder: 0
 --- !u!4 &223359127
 Transform:
@@ -2003,22 +2003,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &223359128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223359125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5232ffb9213324393b3ead284ddadc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerIsRunning: 0
-  redPotion: {fileID: 0}
-  bluePotion: {fileID: 0}
-  timeRemaining: 120
 --- !u!82 &223359129
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2115,6 +2099,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &223359130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223359125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5232ffb9213324393b3ead284ddadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerIsRunning: 0
+  mouse: {fileID: 2134165553}
+  redPotion: {fileID: 0}
+  bluePotion: {fileID: 0}
+  backgroundSprite: {fileID: 21300000, guid: 37d3445f91b184e259bf847f81ac64e1, type: 3}
+  timeRemaining: 120
 --- !u!1001 &230184119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5252,6 +5254,7 @@ MonoBehaviour:
   chosenPotion: 
   availablePotions: []
   uiController: {fileID: 0}
+  laserPointerEnable: 0
 --- !u!1001 &737969708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6384,7 +6387,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873075276}
-  m_LocalRotation: {x: 0.17061052, y: -0.68621576, z: 0.17061052, w: 0.68621576}
+  m_LocalRotation: {x: 0.17061052, y: -0.68621576, z: 0.1706105, w: 0.68621576}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9667,7 +9670,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346916793}
-  m_LocalRotation: {x: 0.15457787, y: -0.69000417, z: 0.15457787, w: 0.69000417}
+  m_LocalRotation: {x: 0.15457785, y: -0.6900042, z: 0.15457788, w: 0.6900041}
   m_LocalPosition: {x: 87.17, y: 54.640003, z: -143.54}
   m_LocalScale: {x: 1.8802142, y: 1.8802137, z: 1.8802142}
   m_ConstrainProportionsScale: 0
@@ -15170,7 +15173,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088696244}
-  m_LocalRotation: {x: 0.15457784, y: -0.6900041, z: 0.15457782, w: 0.6900042}
+  m_LocalRotation: {x: 0.15457782, y: -0.69000417, z: 0.15457785, w: 0.69000417}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15362,7 +15365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ed1b85cf4dfdc44a896b8bc779b828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiController: {fileID: 223359128}
+  uiController: {fileID: 223359130}
   pain: {fileID: 8300000, guid: 8d98e778bdc7d48f3bb0418ee100f18b, type: 3}
   spongeOnWaterTrigger: {fileID: 3469287837276719288}
 --- !u!114 &2134165555
@@ -15379,7 +15382,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chosenPotion: 
   availablePotions: []
-  uiController: {fileID: 223359128}
+  uiController: {fileID: 223359130}
+  laserPointerEnable: 0
 --- !u!114 &2134165556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15498,43 +15502,19 @@ MonoBehaviour:
     m_ActionId: b04e90ff-12c4-4828-b904-39fc48ac4a6e
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2134165557}
-        m_TargetAssemblyTypeName: ThirdPersonMovement, Assembly-CSharp
-        m_MethodName: OnE
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 2ab71d4b-8966-4385-aa71-45f06d7aefb2
     m_ActionName: Player/Activate[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2134165557}
-        m_TargetAssemblyTypeName: ThirdPersonMovement, Assembly-CSharp
-        m_MethodName: OnTab
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 878536b1-3b16-41bd-8d71-21bcf238dd0d
     m_ActionName: Player/Tab toggle[/Keyboard/tab]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 223359128}
+      - m_Target: {fileID: 223359130}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: OnQuit
-        m_Mode: 1
+        m_MethodName: OnPause
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15569,6 +15549,30 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9a299692-2248-4ff2-86f0-43b6e6df6517
     m_ActionName: Player/Zoom[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d2d22f13-161b-440c-80d4-1d819475a7c6
+    m_ActionName: Player/Restart[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a4e9f5d-d522-4e14-95b7-b61716357fc0
+    m_ActionName: Player/Credits[/Keyboard/b]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 223359130}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: OnContinue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 54977077-cedb-448c-b13b-302770aa43b4
+    m_ActionName: Player/UnPause[/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -15599,7 +15603,8 @@ MonoBehaviour:
   grounded: 1
   shooting: 1
   collectableItems: {fileID: 2134165555}
-  uiController: {fileID: 223359128}
+  uiController: {fileID: 0}
+  uiDocument: {fileID: 0}
   sponge: {fileID: 919132149369085352}
   walk: {fileID: 8300000, guid: f263ec31abcf4425b99a30d36f09c354, type: 3}
   jump: {fileID: 8300000, guid: 14c44e0890f0e4b9b879c4a80f76a879, type: 3}
@@ -19143,7 +19148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1e65cec1d5364d358f30d57ffe53c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiController: {fileID: 223359128}
+  uiController: {fileID: 223359130}
   activateIcon: {fileID: 1418494761}
   rb: {fileID: 1235138556}
   timeWhenEnteredWater: 0
@@ -19279,6 +19284,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9a299692-2248-4ff2-86f0-43b6e6df6517
     m_ActionName: Player/Zoom[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d2d22f13-161b-440c-80d4-1d819475a7c6
+    m_ActionName: Player/Restart[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a4e9f5d-d522-4e14-95b7-b61716357fc0
+    m_ActionName: Player/Credits[/Keyboard/b]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

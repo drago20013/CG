@@ -18,11 +18,10 @@ public class Death : MonoBehaviour
 
     void Update()
     {
-        if (!uiController.timerIsRunning) {
+        if (uiController.timeRemaining == 0) {
             UnityEngine.Debug.Log("Time's up, you've died!!");
-            SceneManager.LoadScene("Level1");
+            loadScene();
         }
-        
     }
 
     private void OnTriggerEnter(Collider other)

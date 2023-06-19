@@ -17,14 +17,10 @@ public class UIControllerBusted : MonoBehaviour
         background = root.Q<VisualElement>("BustedScene");
     }
 
-    void LoadRestart()
-    {
-        // SceneManager.LoadScene("Level1");
-    }
-
     void LoadMainMenu()
     {
-        // SceneManager.LoadScene("Level2");
+        UnityEngine.Cursor.lockState = UnityEngine.CursorLockMode.None;
+        SceneManager.LoadScene("Menu");
     }
 
 
@@ -35,7 +31,7 @@ public class UIControllerBusted : MonoBehaviour
 
     public void Exit()
     {
-        SceneManager.LoadScene("Menu");
+        LoadMainMenu();
     }
 }
 
