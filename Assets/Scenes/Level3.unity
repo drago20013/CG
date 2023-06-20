@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028414, g: 0.22571424, b: 0.3069228, a: 1}
+  m_IndirectSpecularColor: {r: 0.18035345, g: 0.22579068, b: 0.30702788, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6722,7 +6722,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873075276}
-  m_LocalRotation: {x: 0.17061056, y: -0.6862157, z: 0.17061052, w: 0.6862158}
+  m_LocalRotation: {x: 0.17061056, y: -0.68621576, z: 0.17061056, w: 0.68621576}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10484,7 +10484,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346916793}
-  m_LocalRotation: {x: 0.1545779, y: -0.6900041, z: 0.15457787, w: 0.6900042}
+  m_LocalRotation: {x: 0.15457791, y: -0.69000417, z: 0.15457791, w: 0.69000417}
   m_LocalPosition: {x: -11.65, y: 54.84, z: -141.95}
   m_LocalScale: {x: 1.8802142, y: 1.8802137, z: 1.8802142}
   m_ConstrainProportionsScale: 0
@@ -10595,7 +10595,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347693641}
-  m_LocalRotation: {x: 0.13853116, y: -0.693404, z: 0.13853116, w: 0.693404}
+  m_LocalRotation: {x: 0.13853116, y: -0.6934041, z: 0.1385312, w: 0.693404}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16621,7 +16621,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088696244}
-  m_LocalRotation: {x: 0.1545779, y: -0.6900041, z: 0.15457785, w: 0.69000417}
+  m_LocalRotation: {x: 0.1545779, y: -0.69000417, z: 0.1545779, w: 0.69000417}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20960,6 +20960,7 @@ GameObject:
   - component: {fileID: 2995300167969797889}
   - component: {fileID: 4168747203644230768}
   - component: {fileID: 4168747203644230767}
+  - component: {fileID: 4168747203644230769}
   m_Layer: 6
   m_Name: laserPointer
   m_TagString: laserPointer
@@ -21571,7 +21572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3643849507628537556}
   m_LocalRotation: {x: 0.0051289867, y: -0, z: -0, w: 0.9999869}
-  m_LocalPosition: {x: 2.03, y: 51.25, z: 30.59}
+  m_LocalPosition: {x: -6.96, y: 51.25, z: 30.59}
   m_LocalScale: {x: 917.84546, y: 917.84546, z: 917.84546}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21609,6 +21610,68 @@ MonoBehaviour:
   availablePotions: []
   uiController: {fileID: 0}
   laserPointerEnable: 0
+--- !u!108 &4168747203644230769
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3643849507628537556}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.9770234, b: 0, a: 1}
+  m_Intensity: 1
+  m_Range: 15
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!33 &4272610069386949824
 MeshFilter:
   m_ObjectHideFlags: 0
